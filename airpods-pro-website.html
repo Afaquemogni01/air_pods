@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirPods Pro 2 - Immersive Sound. Reimagined.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            overflow-x: hidden;
+        }
+
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-scaleIn {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        /* Delay animations */
+        .delay-100 { animation-delay: 0.1s; opacity: 0; }
+        .delay-200 { animation-delay: 0.2s; opacity: 0; }
+        .delay-300 { animation-delay: 0.3s; opacity: 0; }
+        .delay-400 { animation-delay: 0.4s; opacity: 0; }
+        .delay-500 { animation-delay: 0.5s; opacity: 0; }
+
+        /* Frosted glass effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #1d1d1f 0%, #424245 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Hover effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+
+        /* Product image glow */
+        .product-glow {
+            filter: drop-shadow(0 20px 40px rgba(0, 113, 227, 0.1));
+        }
+
+        /* Shine effect on buttons */
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .shine-effect:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="text-2xl font-bold gradient-text">
+                    Apple
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors">Home</a>
+                    <a href="#products" class="text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors">Products</a>
+                    <a href="#features" class="text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors">Features</a>
+                    <a href="#contact" class="text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pt-4 pb-2 space-y-2">
+                <a href="#home" class="block py-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors">Home</a>
+                <a href="#products" class="block py-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors">Products</a>
+                <a href="#features" class="block py-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors">Features</a>
+                <a href="#contact" class="block py-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 pb-20 px-6 bg-gradient-to-br from-white via-gray-50 to-gray-100">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="text-center mb-16 animate-fadeInUp">
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 gradient-text leading-tight">
+                    AirPods Pro
+                </h1>
+                <p class="text-3xl md:text-5xl font-semibold text-gray-700 mb-4">
+                    2nd Generation
+                </p>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto font-light mt-6">
+                    Rebuilt from the sound up. Rethought from the inside out.
+                </p>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="relative max-w-5xl mx-auto animate-fadeIn delay-200">
+                <div class="aspect-[16/10] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-2xl">
+                    <img 
+                        src="https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=1400&h=900&fit=crop&q=95"
+                        alt="AirPods Pro 2nd Generation"
+                        class="w-full h-full object-cover hover-scale product-glow"
+                    />
+                </div>
+                
+                <!-- Floating Price Tag -->
+                <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 glass-effect rounded-2xl px-10 py-5 shadow-2xl animate-scaleIn delay-400">
+                    <p class="text-sm text-gray-600 font-semibold">Starting at</p>
+                    <p class="text-4xl font-bold text-gray-900">₹17,990</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-bold text-center mb-8 gradient-text animate-fadeInUp">
+                Engineered to perfection
+            </h2>
+            <p class="text-xl text-gray-600 text-center mb-20 animate-fadeInUp delay-100">
+                Three revolutionary features that redefine audio excellence
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="group p-10 rounded-3xl hover:bg-gray-50 transition-all duration-500 cursor-pointer hover-lift animate-fadeInUp delay-200">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 0112.728 0"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 text-gray-900">Intelligent Noise Control</h3>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Active Noise Cancellation and Adaptive Transparency intelligently adjust to your environment, ensuring immersive audio in any setting.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="group p-10 rounded-3xl hover:bg-gray-50 transition-all duration-500 cursor-pointer hover-lift animate-fadeInUp delay-300">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 text-gray-900">H2 Chip</h3>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Next-generation Apple silicon delivers breakthrough computational audio performance with smarter noise cancellation and superior sound quality.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="group p-10 rounded-3xl hover:bg-gray-50 transition-all duration-500 cursor-pointer hover-lift animate-fadeInUp delay-400">
+                    <div class="w-20 h-20 bg-gradient-to-br from-pink-600 to-pink-800 rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 text-gray-900">Spatial Audio</h3>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Personalized Spatial Audio with dynamic head tracking creates a theater-like listening experience with sound all around you.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dual Currency Buy Section -->
+    <section class="py-32 px-6 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden animate-scaleIn">
+                <div class="p-8">
+                    <div class="text-center mb-8">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-3 gradient-text">Get your AirPods Pro</h2>
+                        <p class="text-gray-600 text-lg">Choose your preferred marketplace</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- India Card -->
+                        <div class="border-2 border-gray-200 rounded-2xl p-6 hover:border-blue-600 transition-all duration-300 hover:shadow-xl hover-lift">
+                            <div class="mb-5">
+                                <p class="text-sm text-gray-600 font-semibold mb-1 uppercase tracking-wider">India</p>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-4xl font-bold text-gray-900">₹17,990</span>
+                                    <span class="text-gray-500 line-through text-sm">₹24,900</span>
+                                </div>
+                                <p class="text-green-600 text-sm font-semibold mt-1">Save ₹6,910</p>
+                            </div>
+                            <a 
+                                href="https://amzn.to/3ZSQtPE" 
+                                target="https://amzn.to/3ZSQtPE" 
+                                rel="noopener noreferrer"
+                                class="block w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl font-semibold text-center hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl shine-effect"
+                            >
+                                <span class="flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                    Buy on Amazon India
+                                </span>
+                            </a>
+                        </div>
+
+                        <!-- USA Card -->
+                        <div class="border-2 border-gray-200 rounded-2xl p-6 hover:border-gray-900 transition-all duration-300 hover:shadow-xl hover-lift">
+                            <div class="mb-5">
+                                <p class="text-sm text-gray-600 font-semibold mb-1 uppercase tracking-wider">USA</p>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-4xl font-bold text-gray-900">$249</span>
+                                    <span class="text-gray-500 line-through text-sm">$299</span>
+                                </div>
+                                <p class="text-green-600 text-sm font-semibold mt-1">Save $50</p>
+                            </div>
+                            <a 
+                                href="https://amzn.to/3ZSQtPE" 
+                                target="https://amzn.to/3ZSQtPE" 
+                                rel="noopener noreferrer"
+                                class="block w-full bg-gradient-to-r from-gray-900 to-black text-white py-4 rounded-xl font-semibold text-center hover:from-black hover:to-gray-900 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl shine-effect"
+                            >
+                                <span class="flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                    Buy on Best Buy USA
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <p class="text-center text-sm text-gray-500 mt-8">
+                        ✓ Free shipping • Easy returns • 1-year warranty
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Affiliate Products Grid -->
+    <section id="products" class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 animate-fadeInUp">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">Complete your ecosystem</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Discover more premium Apple products designed to work seamlessly together
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="group bg-gray-50 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift animate-fadeInUp delay-100">
+                    <div class="aspect-square overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                        <img 
+                            src="./img/s1.png"
+                            alt="AirPods Max"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">AirPods Max</h3>
+                        <div class="flex items-baseline gap-2 mb-4">
+                            <span class="text-3xl font-bold text-gray-900">₹59,900</span>
+                            <span class="text-gray-500 text-sm">/ $549</span>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <a 
+                                href="https://amzn.to/4ruFebO"
+                                target="https://amzn.to/4ruFebO"
+                                rel="noopener noreferrer"
+                                class="flex items-center justify-center gap-2 w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all shine-effect"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                Buy Now
+                            </a>
+                            <button class="flex items-center justify-center gap-2 w-full border-2 border-gray-900 text-gray-900 py-3 rounded-xl font-semibold hover:bg-gray-900 hover:text-white transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="group bg-gray-50 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift animate-fadeInUp delay-200">
+                    <div class="aspect-square overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                        <img 
+                            src="./img/s3.png"
+                            alt="iPhone 17 Pro Case"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">iPhone 17 Pro Case</h3>
+                        <div class="flex items-baseline gap-2 mb-4">
+                            <span class="text-3xl font-bold text-gray-900">₹7,649</span>
+                            <span class="text-gray-500 text-sm">/ $84</span>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <a 
+                                href="https://amzn.to/4bNKOSl"
+                                target="https://amzn.to/4bNKOSl"
+                                rel="noopener noreferrer"
+                                class="flex items-center justify-center gap-2 w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all shine-effect"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                Buy Now
+                            </a>
+                            <button class="flex items-center justify-center gap-2 w-full border-2 border-gray-900 text-gray-900 py-3 rounded-xl font-semibold hover:bg-gray-900 hover:text-white transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="group bg-gray-50 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift animate-fadeInUp delay-300">
+                    <div class="aspect-square overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                        <img 
+                            src="https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=500&h=500&fit=crop&q=90"
+                            alt="Apple Watch Ultra 2"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Apple Watch Ultra 2</h3>
+                        <div class="flex items-baseline gap-2 mb-4">
+                            <span class="text-3xl font-bold text-gray-900">₹89,900</span>
+                            <span class="text-gray-500 text-sm">/ $799</span>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <a 
+                                href="https://amzn.to/4qmVPgU"
+                                target="https://amzn.to/4qmVPgU"
+                                rel="noopener noreferrer"
+                                class="flex items-center justify-center gap-2 w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all shine-effect"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                Buy Now
+                            </a>
+                            <button class="flex items-center justify-center gap-2 w-full border-2 border-gray-900 text-gray-900 py-3 rounded-xl font-semibold hover:bg-gray-900 hover:text-white transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="group bg-gray-50 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift animate-fadeInUp delay-400">
+                    <div class="aspect-square overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                        <img 
+                            src="./img/s2.png"
+                            alt="MagSafe Charger"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">MagSafe Charger</h3>
+                        <div class="flex items-baseline gap-2 mb-4">
+                            <span class="text-3xl font-bold text-gray-900">₹4,500</span>
+                            <span class="text-gray-500 text-sm">/ $39</span>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <a 
+                                href="https://amzn.to/4to723n"
+                                target="https://amzn.to/4to723n"
+                                rel="noopener noreferrer"
+                                class="flex items-center justify-center gap-2 w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all shine-effect"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                Buy Now
+                            </a>
+                            <button class="flex items-center justify-center gap-2 w-full border-2 border-gray-900 text-gray-900 py-3 rounded-xl font-semibold hover:bg-gray-900 hover:text-white transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-100 py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-gray-900">Shop</h4>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">AirPods</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">iPhone</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Apple Watch</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-gray-900">Support</h4>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Returns</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Warranty</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-gray-900">About</h4>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Our Story</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Press</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Investors</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-gray-900">Legal</h4>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Cookie Policy</a></li>
+                        <li><a href="#" class="hover:text-gray-900 transition-colors">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-300 pt-10 text-center text-sm text-gray-600">
+                <p class="mb-2">© 2024 Apple-inspired Design. This is an affiliate marketing website.</p>
+                <p>Prices and availability subject to change. Check retailer for current offers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('glass-effect', 'shadow-lg');
+            } else {
+                navbar.classList.remove('glass-effect', 'shadow-lg');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-fadeInUp, .animate-scaleIn').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
